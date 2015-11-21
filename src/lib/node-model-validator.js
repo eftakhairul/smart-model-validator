@@ -100,8 +100,8 @@
                     (this.model[key] == null || this.model[key] == '') )) {
 
 
-                    this.flag = false;
-                    this.errors[key] = "This value is required";
+                    this.flag           = false;
+                    this.errors[key]    = "This value is required";
                 }
 
                 if (this.rules[key].type &&
@@ -110,7 +110,6 @@
 
                     this.flag        = false;
                     this.errors[key] = "This value is required";
-
                 }
             }
         }
