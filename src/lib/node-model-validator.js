@@ -1,94 +1,137 @@
 (function () {
     "use strict";
 
+    var validator = require('validator');
+
     /**
      * Node Model Validator.
-     *
      *
      * @constructor
      */
     var NodeModelValidator = function() {
-        this.flag           = false;
-        this.validator      = {};
-        this.error          = [];
+        this.rules          = {};
+        this.errors         = {};
         this.model          = {};
     };
 
 
     /**
-     * Set new ISBN number
+     * Set Object of Rules
      *
-     * @param {String} isbn to be added
-     * @private
+     * @param {Object} rules to be added
+     * @public
      */
-    Gisbn.prototype.setIsbn = function(isbn) {
-        this.isbn = isbn;
-    }
+    NodeModelValidator.prototype.setRules = function(rules) {
+        for (var property in rules) {
+            if (rules.hasOwnProperty(property)) {
+                this.rules[property.trim().toString()] = {
+                    require:rules[property].require,
+                    type:rules[property].type
+                }
+            }
+        }
+    };
 
     /**
-     * Fetch all information from google book api
+     * Set Model Object
      *
-     * @param {function} callback method
+     * @example: nodeModelValidator.setModel({name: 'Roy', age: 35});
+     *
+     * @param {Object} model
+     * @public
+     */
+    NodeModelValidator.prototype.setModel = function(model) {
+        if ( (Object.prototype.toString.call(model)) != "[object Object]" ||
+            (Object.keys(model).length == 0)) throw "This is not a valid model";
+
+        this.model  = model;
+    };
+
+
+    /**
+     * Add new Rule
+     *
+     * @param {String} property name
+     * @param {Bool} require or not
+     * @param {String|Object} name of validator or referece of validator method
+     * @public
+     */
+    NodeModelValidator.prototype.AddRule = function(property, require, type) {
+        this.rules[property.trim().toString()] = {
+            require:require,
+            type:type
+        }
+    };
+
+    /**
+     * Return the object of errors
+     *
+     * @public
      * @return Object
      */
-    Gisbn.prototype.fetch = function(callback) {
+    NodeModelValidator.prototype.getErrors = function() {
+        return this.errors;
+    };
 
-        //check callback
-        callback = (typeof callback === 'function') ? callback : function() {};
 
-        // Create the request uri
-        var query = {
-            key:        this.key,
-            country:    this.country,
-            q:          'isbn:' + this.isbn
-        };
 
-        //Book API Request URI
-        var bookRequestUri = baseUrl + querystring.stringify(query);
 
-        var req = https.get(bookRequestUri, function(res) {
-
-            var body = '';
-            res.on('data', function(chunk) {
-                body += chunk;
-            });
-
-            res.on('end', function() {
-                // Parse response body
-                try {
-                    var responseObject = JSON.parse(body);
-                    callback(null, {
-                        id:             responseObject.items[0].kind,
-                        selflink:       responseObject.items[0].selfLink,
-                        title:          responseObject.items[0].volumeInfo.title,
-                        authors:        responseObject.items[0].volumeInfo.authors,
-                        publisher:      responseObject.items[0].volumeInfo.publisher,
-                        publisheddate:  responseObject.items[0].volumeInfo.publishedDate,
-                        description:    responseObject.items[0].volumeInfo.description,
-                        isbn13:         responseObject.items[0].volumeInfo.industryIdentifiers[0].identifier,
-                        isbn10:         responseObject.items[0].volumeInfo.industryIdentifiers[1].identifier,
-                        totalpages:     parseInt(responseObject.items[0].volumeInfo.pageCount, 10),
-                        rating:         responseObject.items[0].volumeInfo.averageRating,
-                        previewlink:    responseObject.items[0].volumeInfo.previewLink,
-                        smallthumbnail: responseObject.items[0].volumeInfo.imageLinks.smallThumbnail,
-                        thumbnail:      responseObject.items[0].volumeInfo.imageLinks.thumbnail
-                    });
-
-                } catch (e) {
-                    callback(e, null);
-                }
-            });
-
-            res.on('error', function(err) {
-                // handle errors with the request itself
-                console.error('Error with the request:', err.message);
-                callback(err, null);
-            });
-        }).end();
-    }
 
     /**
-     * Exports googleapis.
+     * check validation
+     *
+     * If model is valid against the provide validation rueles
+     * It return true, neither it return false
+     *
+     * @param {Object|null} model for validator
+     */
+    NodeModelValidator.prototype.isValid = function(model) {
+        this.model  = typeof model !== 'undefined' ? model : this.model;
+        this.errors = [];
+        var flag    = true;
+
+        if (Object.keys(this.model).length == 0) throw "This is not a valid model";
+
+        for (var key in this.rules) {
+            if (this.rules.hasOwnProperty(key)) {
+
+                if (this.rules[key].require &&
+                    (!this.model.hasOwnProperty(key) ||
+                    (this.model[key] == null || this.model[key] == '') )) {
+
+
+                    this.flag = false;
+                    this.errors[key] = "This value is required";
+                }
+
+                if (this.rules[key].type &&
+                    this.model.hasOwnProperty(key) &&
+                    !this.checkValid(this.rules[key].type, this.model[key])) {
+
+                    this.flag        = false;
+                    this.errors[key] = "This value is required";
+
+                }
+            }
+        }
+
+
+        return this.flag;
+    };
+
+
+    NodeModelValidator.prototype.checkValid = function(validator_method, data) {
+        var validator = (typeof validator_method === 'function') ? validator_method : validator['is'+ this.capitalize(validator_method)];
+
+        return validator(data);
+    };
+
+    NodeModelValidator.prototype.capitalize = function(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    };
+
+    /**
+     * Exports Node Model validator object
      */
     module.exports = NodeModelValidator;
 })();
