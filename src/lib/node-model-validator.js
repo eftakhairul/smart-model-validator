@@ -120,12 +120,24 @@
     };
 
 
+    /**
+     * Return true if data is valid else false
+     *
+     * @private
+     * @return Bool
+     */
     NodeModelValidator.prototype.checkValid = function(validator_method, data) {
         var validator = (typeof validator_method === 'function') ? validator_method : validator['is'+ this.capitalize(validator_method)];
 
         return validator(data);
     };
 
+    /**
+     * Return capitalized string
+     *
+     * @private
+     * @return String
+     */
     NodeModelValidator.prototype.capitalize = function(str) {
         return str.charAt(0).toUpperCase() + str.slice(1);
     };
