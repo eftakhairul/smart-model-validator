@@ -25,8 +25,8 @@
         for (var property in rules) {
             if (rules.hasOwnProperty(property)) {
                 this.rules[property.trim().toString()] = {
-                    require:rules[property].require,
-                    type:rules[property].type
+                    require : rules[property].hasOwnProperty('require') ? rules[property].require : false,
+                    type    : rules[property].hasOwnProperty('type') ? rules[property].type : false
                 }
             }
         }
@@ -52,14 +52,14 @@
      * Add new Rule
      *
      * @param {String} property name
-     * @param {Bool} require or not
+     * @param {Bool} is_require or not
      * @param {String|Object} name of validator or referece of validator method
      * @public
      */
-    NodeModelValidator.prototype.AddRule = function(property, require, type) {
+    NodeModelValidator.prototype.AddRule = function(property, is_required, type) {
         this.rules[property.trim().toString()] = {
-            require:require,
-            type:type
+            require : typeof is_required !== 'undefined' ? is_required : false,
+            type    : type
         }
     };
 
