@@ -13,10 +13,19 @@
     "node-model-validator",
     "model-validator"
   ],
+  "scripts": {
+    "test": "mocha --require tests/helpers/chai.js tests"
+  },
   "bin": {
     "uppercaseme": "./bin/node-model-validator"
   },
-  "dependencies": {},
+  "dependencies": {
+    "validator": "^4.3.0"
+  },
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "mocha": "^2.2.5"
+  },
   "engines": {
     "node": "*"
   }
