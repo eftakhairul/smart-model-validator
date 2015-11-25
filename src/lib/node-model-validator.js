@@ -3,12 +3,8 @@
 
    var validator = require('validator');
     
-   validator.isString = function(value) {
-        return (typeof value === 'string' || value instanceof String)? true: false
-    };
-
     /**
-     * Node Model Validator.
+     * Node Model Validator
      *
      * @constructor
      */
@@ -56,15 +52,21 @@
     /**
      * Add new Rule
      *
+     * @example: nodeModelValidator.AddRule('email', true, 'email', 'email has to be valid');
+     *
      * @param {String} property name
      * @param {Bool} is_require or not
      * @param {String|Object} name of validator or referece of validator method
+     * @param {String} custom error message
+     *
      * @public
      */
-    NodeModelValidator.prototype.AddRule = function(property, is_required, type) {
+    NodeModelValidator.prototype.AddRule = function(property, is_required, type, message) {
         this.rules[property.trim().toString()] = {
-            require : typeof is_required !== 'undefined' ? is_required : false,
-            type    : type
+            require         : typeof is_required !== 'undefined' ? is_required : false,
+            type            : typeof type !== 'underfined' ? type: false,
+            error_message   : typeof message !== 'underfined' ? message : false;
+
         }
     };
 
@@ -77,8 +79,6 @@
     NodeModelValidator.prototype.getErrors = function() {
         return this.errors;
     };
-
-
 
 
 
@@ -146,6 +146,16 @@
      */
     NodeModelValidator.prototype.capitalize = function(str) {
         return str.charAt(0).toUpperCase() + str.slice(1);
+    };
+
+    /**
+     * Checking input is string or not
+     *
+     * @private
+     * @return Bool
+     */
+    validator.isString = function(value) {
+        return (typeof value === 'string' || value instanceof String)? true: false
     };
 
     /**
