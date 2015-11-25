@@ -17,15 +17,17 @@ describe('#node-model-validator', function() {
 
     it('require check', function(done) {
         nodeModelValidator.setRules(rules);
-        nodeModelValidator.setModel({name: 26});
+        nodeModelValidator.setModel({age: 26});
         assert.equal(nodeModelValidator.isValid(), false);
+
         done();
     });
 
     it('type check', function(done) {
         nodeModelValidator.setRules(rules);
-        nodeModelValidator.setModel({name: 'rain', age: 'r26'});
+        nodeModelValidator.setModel({name: 'Mr Smith', age: 'r26'});
         assert.equal(nodeModelValidator.isValid(), false);
+
         done();
     });
 });
