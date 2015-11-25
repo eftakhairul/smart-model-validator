@@ -1,7 +1,11 @@
 (function () {
     "use strict";
 
-    var validator = require('validator');
+   var validator = require('validator');
+    
+   validator.isString = function(value) {
+        return (typeof value === 'string' || value instanceof String)? true: false
+    };
 
     /**
      * Node Model Validator.
@@ -25,8 +29,9 @@
         for (var property in rules) {
             if (rules.hasOwnProperty(property)) {
                 this.rules[property.trim().toString()] = {
-                    require : rules[property].hasOwnProperty('require') ? rules[property].require : false,
-                    type    : rules[property].hasOwnProperty('type') ? rules[property].type : false
+                    require       : rules[property].hasOwnProperty('require') ? rules[property].require : false,
+                    type          : rules[property].hasOwnProperty('type') ? rules[property].type : false,
+                    error_message : rules[property].hasOwnProperty('message')? rules[message].type : false
                 }
             }
         }
@@ -92,30 +97,32 @@
 
         if (Object.keys(this.model).length == 0) throw "This is not a valid model";
 
+
         for (var key in this.rules) {
             if (this.rules.hasOwnProperty(key)) {
+
+
 
                 if (this.rules[key].require &&
                     (!this.model.hasOwnProperty(key) ||
                     (this.model[key] == null || this.model[key] == '') )) {
 
 
-                    this.flag           = false;
-                    this.errors[key]    = "This value is required";
+                    flag           = false;
+                    this.errors[key]    = this.capitalize(key) + ' is required';
                 }
 
-                if (this.rules[key].type &&
+               if (this.rules[key].type &&
                     this.model.hasOwnProperty(key) &&
                     !this.checkValid(this.rules[key].type, this.model[key])) {
 
-                    this.flag        = false;
-                    this.errors[key] = "This value is required";
+                    flag        = false;
+                    this.errors[key] = this.rules[key].error_message? this.rules[key].error_message : 'Field:' + key + ' is not valid';
                 }
             }
-        }
+        };
 
-
-        return this.flag;
+        return flag;
     };
 
 
@@ -125,10 +132,10 @@
      * @private
      * @return Bool
      */
-    NodeModelValidator.prototype.checkValid = function(validator_method, data) {
-        var validator = (typeof validator_method === 'function') ? validator_method : validator['is'+ this.capitalize(validator_method)];
+    NodeModelValidator.prototype.checkValid = function(method, data) {
+        var validator_method = (typeof method === 'function') ? method : validator['is'+ this.capitalize(method)];
 
-        return validator(data);
+        return validator_method(data);
     };
 
     /**

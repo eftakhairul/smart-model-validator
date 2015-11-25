@@ -1,0 +1,31 @@
+var NodeModelValidator = require('../src/lib/node-model-validator.js');
+
+describe('#node-model-validator', function() {
+    var nodeModelValidator;
+    var rules = {};
+
+
+    before(function () {
+        nodeModelValidator = new NodeModelValidator();
+        rules = {name: {require:true,
+                        type:'string'},
+                 
+                 age: {require:false,
+                        type: 'int'}   
+                };
+    });
+
+    it('require check', function(done) {
+        nodeModelValidator.setRules(rules);
+        nodeModelValidator.setModel({name: 26});
+        assert.equal(nodeModelValidator.isValid(), false);
+        done();
+    });
+
+    it('type check', function(done) {
+        nodeModelValidator.setRules(rules);
+        nodeModelValidator.setModel({name: 'rain', age: 'r26'});
+        assert.equal(nodeModelValidator.isValid(), false);
+        done();
+    });
+});
