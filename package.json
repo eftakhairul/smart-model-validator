@@ -17,7 +17,7 @@
     "test": "mocha --require tests/helpers/chai.js tests"
   },
   "bin": {
-    "uppercaseme": "./bin/node-model-validator"
+    "node-model-validator": "./bin/node-model-validator"
   },
   "dependencies": {
     "validator": "^4.3.0"
