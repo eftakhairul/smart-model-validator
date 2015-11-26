@@ -1,5 +1,5 @@
 # node-model-validator
-[![Build Status](https://travis-ci.org/eftakhairul/node-model-validator.svg?branch=master)](https://travis-ci.org/eftakhairul/node-model-validator) [![GitHub issues](https://img.shields.io/github/issues/eftakhairul/node-model-validator.svg)](https://github.com/eftakhairul/node-model-validator/issues)  [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/eftakhairul/node-model-validator/master/LICENSE.txt)
+[![Build Status](https://travis-ci.org/eftakhairul/node-model-validator.svg?branch=master)](https://travis-ci.org/eftakhairul/node-model-validator) [![GitHub issues](https://img.shields.io/github/issues/eftakhairul/node-model-validator.svg)](https://github.com/eftakhairul/node-model-validator/issues)  [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/eftakhairul/node-model-validator/master/LICENSE)
 
 It validate model as object against specific rules
 
