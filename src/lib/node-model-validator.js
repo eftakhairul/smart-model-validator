@@ -101,22 +101,24 @@
         for (var key in this.rules) {
             if (this.rules.hasOwnProperty(key)) {
 
-
+                var isRequiredFail = false;
 
                 if (this.rules[key].require &&
                     (!this.model.hasOwnProperty(key) ||
                     (this.model[key] == null || this.model[key] == '') )) {
 
 
+                    isRequiredFail = true;
                     flag           = false;
                     this.errors[key]    = this.capitalize(key) + ' is required';
                 }
 
-               if (this.rules[key].type &&
+               if (!isRequiredFail &&
+                    this.rules[key].type &&
                     this.model.hasOwnProperty(key) &&
                     !this.checkValid(this.rules[key].type, this.model[key])) {
 
-                    flag        = false;
+                    flag             = false;
                     this.errors[key] = this.rules[key].error_message? this.rules[key].error_message : 'Field:' + key + ' is not valid';
                 }
             }
@@ -150,6 +152,8 @@
 
     /**
      * Checking input is string or not
+     * 
+     * Custromization method added to validator
      *
      * @private
      * @return Bool

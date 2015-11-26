@@ -23,8 +23,8 @@
     "validator": "^4.3.0"
   },
   "devDependencies": {
-    "chai": "^3.2.0",
-    "mocha": "^2.2.5"
+    "chai": "^3.4.1",
+    "mocha": "^2.3.4"
   },
   "engines": {
     "node": "*"

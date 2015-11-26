@@ -11,11 +11,19 @@ describe('#node-model-validator', function() {
                         type:'string'},
                  
                  age: {require:false,
-                        type: 'int'}   
+                       type: 'int'}   
                 };
     });
 
-    it('require check', function(done) {
+     it('basic validation check', function(done) {
+        nodeModelValidator.setRules(rules);
+        nodeModelValidator.setModel({name: 'Smith', age: 26});
+        assert.equal(nodeModelValidator.isValid(), true);
+
+        done();
+    });
+
+      it('require check', function(done) {
         nodeModelValidator.setRules(rules);
         nodeModelValidator.setModel({age: 26});
         assert.equal(nodeModelValidator.isValid(), false);
