@@ -27,7 +27,7 @@
                 this.rules[property.trim().toString()] = {
                     require       : rules[property].hasOwnProperty('require') ? rules[property].require : false,
                     type          : rules[property].hasOwnProperty('type') ? rules[property].type : false,
-                    error_message : rules[property].hasOwnProperty('message')? rules[message].type : false
+                    error_message : rules[property].hasOwnProperty('message')? rules[message].message : false
                 }
             }
         }
@@ -62,11 +62,13 @@
      * @public
      */
     NodeModelValidator.prototype.AddRule = function(property, is_required, type, message) {
+
+        if (property == 'undefined') throw new Error('Property can not be empty');
+
         this.rules[property.trim().toString()] = {
             require         : typeof is_required !== 'undefined' ? is_required : false,
-            type            : typeof type !== 'underfined' ? type: false,
-            error_message   : typeof message !== 'underfined' ? message : false;
-
+            type            : typeof type        !== 'undefined' ? type : false,
+            error_message   : typeof message     !== 'undefined' ? message : false
         }
     };
 
