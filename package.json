@@ -2,7 +2,7 @@
   "author": "Md Eftakahirul Islam",
   "name": "node-model-validator",
   "description": "A validator library where you will set validator rules and send model or array to validate",
-  "version": "0.1.1",
+  "version": "0.0.1",
   "bugs": {
     "url": "https://github.com/eftakhairul/node-model-validator/issues"
   },
@@ -10,7 +10,6 @@
     "type": "git",
     "url": "https://github.com/eftakhairul/node-model-validator.git"
   },
-  
   "main": "./src/lib/node-model-validator",
   "keywords": [
     "validator",
