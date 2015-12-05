@@ -1,17 +1,10 @@
-# node-model-validator
-[![Build Status](https://travis-ci.org/eftakhairul/node-model-validator.svg?branch=master)](https://travis-ci.org/eftakhairul/node-model-validator) [![GitHub issues](https://img.shields.io/github/issues/eftakhairul/node-model-validator.svg)](https://github.com/eftakhairul/node-model-validator/issues)  [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/eftakhairul/node-model-validator/master/LICENSE)
+# smart-model-validator
+[![Build Status](https://travis-ci.org/eftakhairul/smart-model-validator.svg?branch=master)](https://travis-ci.org/eftakhairul/smart-model-validator) [![GitHub issues](https://img.shields.io/github/issues/eftakhairul/smart-model-validator.svg)](https://github.com/eftakhairul/smart-model-validator/issues)  [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/eftakhairul/smart-model-validator/master/LICENSE)
 
 It validate model as object against specific rules
 
-  - Easy to get all information by ISBN
-  - Structure data
-
-You don't have to call manually Google API with ISBN number. This library will do everything for you and return you JSON object.
-
-
-
 ### Version
-1.0.0
+0.0.1
 
 
 ### Installation
