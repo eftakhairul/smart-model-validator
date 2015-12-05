@@ -1,12 +1,12 @@
-var NodeModelValidator = require('../src/lib/node-model-validator.js');
+var ModelValidator = require('../src/lib/smart-model-validator.js');
 
 describe('#node-model-validator', function() {
-    var nodeModelValidator;
+    var modelValidator;
     var rules = {};
 
 
     before(function () {
-        nodeModelValidator = new NodeModelValidator();
+        modelValidator = new ModelValidator();
         rules = {name: {require:true,
                         type:'string'},
                  
@@ -16,25 +16,25 @@ describe('#node-model-validator', function() {
     });
 
      it('basic validation check', function(done) {
-        nodeModelValidator.setRules(rules);
-        nodeModelValidator.setModel({name: 'Smith', age: 26});
-        assert.equal(nodeModelValidator.isValid(), true);
+        modelValidator.setRules(rules);
+        modelValidator.setModel({name: 'Smith', age: 26});
+        assert.equal(modelValidator.isValid(), true);
 
         done();
     });
 
       it('require check', function(done) {
-        nodeModelValidator.setRules(rules);
-        nodeModelValidator.setModel({age: 26});
-        assert.equal(nodeModelValidator.isValid(), false);
+        modelValidator.setRules(rules);
+        modelValidator.setModel({age: 26});
+        assert.equal(modelValidator.isValid(), false);
 
         done();
     });
 
     it('type check', function(done) {
-        nodeModelValidator.setRules(rules);
-        nodeModelValidator.setModel({name: 'Mr Smith', age: 'r26'});
-        assert.equal(nodeModelValidator.isValid(), false);
+        modelValidator.setRules(rules);
+        modelValidator.setModel({name: 'Mr Smith', age: 'r26'});
+        assert.equal(modelValidator.isValid(), false);
 
         done();
     });
