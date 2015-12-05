@@ -1,27 +1,28 @@
 {
   "author": "Md Eftakahirul Islam",
-  "name": "node-model-validator",
+  "name": "smart-model-validator",
   "description": "A validator library where you will set validator rules and send model or array to validate",
   "version": "0.0.1",
   "bugs": {
-    "url": "https://github.com/eftakhairul/node-model-validator/issues"
+    "url": "https://github.com/eftakhairul/smart-model-validator/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/eftakhairul/node-model-validator.git"
+    "url": "https://github.com/eftakhairul/smart-model-validator.git"
   },
-  "main": "./src/lib/node-model-validator",
+  "main": "./src/lib/smart-model-validator",
   "keywords": [
     "validator",
     "file",
     "node-model-validator",
+    "smart-model-validator",
     "model-validator"
   ],
   "scripts": {
     "test": "mocha --require tests/helpers/chai.js tests"
   },
   "bin": {
-    "node-model-validator": "./src/bin/node-model-validator"
+    "smart-model-validator": "./src/bin/smart-model-validator"
   },
   "dependencies": {
     "validator": "^4.3.0"
