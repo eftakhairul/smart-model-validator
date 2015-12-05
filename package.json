@@ -2,7 +2,7 @@
   "author": "Md Eftakahirul Islam",
   "name": "smart-model-validator",
   "description": "A validator library where you will set validator rules and send model or array to validate",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "bugs": {
     "url": "https://github.com/eftakhairul/smart-model-validator/issues"
   },

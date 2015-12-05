@@ -1,10 +1,13 @@
 # smart-model-validator
 [![Build Status](https://travis-ci.org/eftakhairul/node-model-validator.svg?branch=master)](https://travis-ci.org/eftakhairul/smart-model-validator) [![GitHub issues](https://img.shields.io/github/issues/eftakhairul/smart-model-validator.svg)](https://github.com/eftakhairul/smart-model-validator/issues)  [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/eftakhairul/smart-model-validator/master/LICENSE)
 
-It validate model as object against specific rules
+It validate model as object against specific rules. It's has following features
+
+-- Custom error message
+-- Accept custom validation
 
 ### Version
-0.0.1
+0.0.3
 
 
 ### Installation
@@ -17,7 +20,7 @@ $ npm install -g smart-model-validator
 Or inside project:
 
 ```sh
-$ npm install npm install smart-model-validator --save
+$ npm install smart-model-validator --save
 ```
 
 
