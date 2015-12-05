@@ -11,20 +11,23 @@ It validate model as object against specific rules
 Install package globally:
 
 ```sh
-$ npm install -g node-model-validator
+$ npm install -g smart-model-validator
 ```
 
 Or inside project:
 
 ```sh
-$ npm install npm install node-model-validator --save
+$ npm install npm install smart-model-validator --save
 ```
 
 
 ## Examples
 ```js
-var nodeModelValidator = require('node-model-validator');
+//require library
+var ModelValidator = require('smart-model-validator');
 
-nodeModelValidator.setRules({name:{require:true, type: 'string'}});
-console.log(nodeModelValidator.isValid({name: 'Mr. Smith'}));   //true
+
+var modelValidator = new ModelValidator();
+modelValidator.setRules({name:{require:true, type: 'string'}});
+console.log(modelValidator.isValid({name: 'Mr. Smith'}));   //true
 ```
