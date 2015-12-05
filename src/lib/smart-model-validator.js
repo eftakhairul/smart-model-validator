@@ -4,11 +4,11 @@
    var validator = require('validator');
     
     /**
-     * Node Model Validator
+     * Smart Model Validator
      *
      * @constructor
      */
-    var NodeModelValidator = function() {
+    var SmartModelValidator = function() {
         this.rules          = {};
         this.errors         = {};
         this.model          = {};
@@ -21,7 +21,7 @@
      * @param {Object} rules to be added
      * @public
      */
-    NodeModelValidator.prototype.setRules = function(rules) {
+    SmartModelValidator.prototype.setRules = function(rules) {
         for (var property in rules) {
             if (rules.hasOwnProperty(property)) {
                 this.rules[property.trim().toString()] = {
@@ -41,7 +41,7 @@
      * @param {Object} model
      * @public
      */
-    NodeModelValidator.prototype.setModel = function(model) {
+    SmartModelValidator.prototype.setModel = function(model) {
         if ( (Object.prototype.toString.call(model)) != "[object Object]" ||
             (Object.keys(model).length == 0)) throw "This is not a valid model";
 
@@ -56,17 +56,17 @@
      *
      * @param {String} property name
      * @param {Bool} is_require or not
-     * @param {String|Object} name of validator or referece of validator method
-     * @param {String} custom error message
+     * @param {String|Object} type name of validator or referece of validator method
+     * @param {String} message custom error message
      *
      * @public
      */
-    NodeModelValidator.prototype.AddRule = function(property, is_required, type, message) {
+    SmartModelValidator.prototype.AddRule = function(property, is_require, type, message) {
 
         if (property == 'undefined') throw new Error('Property can not be empty');
 
         this.rules[property.trim().toString()] = {
-            require         : typeof is_required !== 'undefined' ? is_required : false,
+            require         : typeof is_require  !== 'undefined' ? is_require : false,
             type            : typeof type        !== 'undefined' ? type : false,
             error_message   : typeof message     !== 'undefined' ? message : false
         }
@@ -75,10 +75,13 @@
     /**
      * Return the object of errors
      *
-     * @public
+     * @example: nodeModelValidator.getErrors()  //{'name': 'Name is required'};
+     *
      * @return Object
+     *
+     * @public
      */
-    NodeModelValidator.prototype.getErrors = function() {
+    SmartModelValidator.prototype.getErrors = function() {
         return this.errors;
     };
 
@@ -92,7 +95,7 @@
      *
      * @param {Object|null} model for validator
      */
-    NodeModelValidator.prototype.isValid = function(model) {
+    SmartModelValidator.prototype.isValid = function(model) {
         this.model  = typeof model !== 'undefined' ? model : this.model;
         this.errors = [];
         var flag    = true;
@@ -124,7 +127,7 @@
                     this.errors[key] = this.rules[key].error_message? this.rules[key].error_message : 'Field:' + key + ' is not valid';
                 }
             }
-        };
+        }
 
         return flag;
     };
@@ -136,7 +139,7 @@
      * @private
      * @return Bool
      */
-    NodeModelValidator.prototype.checkValid = function(method, data) {
+    SmartModelValidator.prototype.checkValid = function(method, data) {
         var validator_method = (typeof method === 'function') ? method : validator['is'+ this.capitalize(method)];
 
         return validator_method(data);
@@ -148,7 +151,7 @@
      * @private
      * @return String
      */
-    NodeModelValidator.prototype.capitalize = function(str) {
+    SmartModelValidator.prototype.capitalize = function(str) {
         return str.charAt(0).toUpperCase() + str.slice(1);
     };
 
@@ -161,11 +164,11 @@
      * @return Bool
      */
     validator.isString = function(value) {
-        return (typeof value === 'string' || value instanceof String)? true: false
+        return (typeof value === 'string' || value instanceof String)? true: false;
     };
 
     /**
      * Exports Node Model validator object
      */
-    module.exports = NodeModelValidator;
+    module.exports = SmartModelValidator;
 })();
