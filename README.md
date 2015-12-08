@@ -7,7 +7,7 @@ It validate model as object against specific rules. It's has following features
 -- Accept custom validation
 
 ### Version
-0.0.3
+0.0.5
 
 
 ### Installation

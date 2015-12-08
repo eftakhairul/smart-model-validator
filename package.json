@@ -1,8 +1,9 @@
 {
-  "author": "Md Eftakahirul Islam",
+  "author": "Md Eftakahirul Islam <eftakhairul@gmail.com>",
   "name": "smart-model-validator",
   "description": "A validator library where you will set validator rules and send model or array to validate",
-  "version": "0.0.4",
+  "homepage": "https://github.com/eftakhairul/smart-model-validator",
+  "version": "0.0.5",
   "bugs": {
     "url": "https://github.com/eftakhairul/smart-model-validator/issues"
   },
@@ -33,5 +34,6 @@
   },
   "engines": {
     "node": "*"
-  }
+  },
+  "license": "MIT"
 }
