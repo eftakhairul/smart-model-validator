@@ -1,5 +1,5 @@
 # smart-model-validator
-[![Build Status](https://travis-ci.org/eftakhairul/node-model-validator.svg?branch=master)](https://travis-ci.org/eftakhairul/smart-model-validator) [![GitHub issues](https://img.shields.io/github/issues/eftakhairul/smart-model-validator.svg)](https://github.com/eftakhairul/smart-model-validator/issues)  [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/eftakhairul/smart-model-validator/master/LICENSE)
+[![Build Status](https://travis-ci.org/eftakhairul/node-model-validator.svg?branch=master)](https://travis-ci.org/eftakhairul/node-model-validator) [![GitHub issues](https://img.shields.io/github/issues/eftakhairul/smart-model-validator.svg)](https://github.com/eftakhairul/smart-model-validator/issues)  [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/eftakhairul/smart-model-validator/master/LICENSE)
 
 It validate model as object against specific rules. It's has following features
 
@@ -34,3 +34,18 @@ var modelValidator = new ModelValidator();
 modelValidator.setRules({name:{require:true, type: 'string'}});
 console.log(modelValidator.isValid({name: 'Mr. Smith'}));   //true
 ```
+
+## Supported Validation
+    - String
+    - Int
+    - Base64
+    - Boolean
+    - Date
+    - Float
+    - IP
+    - ISBN
+    - SO8601
+    - JSON
+    - UUID
+    
+    
